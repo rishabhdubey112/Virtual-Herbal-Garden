@@ -1,106 +1,131 @@
-# 🌱 Virtual Herbal Garden
+<div align="center">
 
-A comprehensive, full-stack Artificial Intelligence-powered web application designed for exploring, identifying, and purchasing medicinal plants. This project blends traditional Ayurvedic knowledge with cutting-edge AI technologies to provide users with a smart, interactive, and beautifully designed digital garden experience.
+# 🌿 Virtual Herbal Garden
 
-## ✨ Key Features
+### An Interactive Educational Platform for Medicinal Plants
 
-* 🌿 **AI Plant Identifier** 
-  * Powered by **LLaMA 3.2 Vision** and **NVIDIA Nemotron-70b**.
-  * Upload a real plant image or type a common name, and the AI will analyze it to provide scientific names, confidence scores, medicinal benefits, and growing seasons.
-* 👨‍⚕️ **AI Ayurvedic Doctor (Consultation)**
-  * Input your symptoms, and the AI doctor cross-references our local database to recommend the best herbal remedies and exact plants available in the store.
-* 🛒 **E-Commerce & Digital Shopping Cart**
-  * Seamless cart management and checkout flow with options for **Credit/Debit Card, UPI, and Cash on Delivery (COD)**.
-* 🪴 **My Digital Garden (Plant Tracker)**
-  * A personalized dashboard reflecting your order history.
-  * Interactive tracking system allowing users to log when they "Watered" their purchased plants.
-* ⭐ **Community Review System**
-  * 5-star rating and comment system for all plants, allowing users to share their experiences.
-* 🛠️ **Admin Panel**
-  * Manage inventory seamlessly. Add, edit, or delete plant entries and update the database graphically.
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org/)
+
+> 🏆 **Smart India Hackathon 2026 — SIH1555**
+
+</div>
 
 ---
 
-## 🛠️ Technology Stack
+## 📖 About The Project
 
-* **Frontend:** React.js (Vite), Modern Vanilla CSS (Glassmorphism & Gradients)
-* **Backend:** Python, Flask, Flask-CORS
-* **Database:** SQLite (`herbal_garden.db` with automated migrations)
-* **AI APIs:** OpenRouter (NVIDIA LLaMA / Nemotron)
-* **Deployment Tools:** Vite Proxy, Localtunnel (for mobile display)
+**Virtual Herbal Garden** is an interactive, educational web platform that brings the world of medicinal plants to your fingertips. It showcases herbs used in **AYUSH systems** — Ayurveda, Yoga & Naturopathy, Unani, Siddha, and Homeopathy — making traditional knowledge accessible to everyone.
+
+### ✨ Key Features
+
+- 🌱 **Plant Database** — Detailed info on medicinal plants with images, properties & uses
+- 🔍 **AI Plant Identification** — Upload a photo and identify the plant instantly
+- 💊 **Medicinal Properties** — Uses, benefits, and AYUSH system classification
+- 🛒 **Cart System** — Save and explore plants of interest
+- 👨‍💼 **Admin Panel** — Manage plant data easily
+- 🤖 **AI Chatbot** — Ask questions about any herbal plant
+- 📱 **Responsive UI** — Works on all devices
 
 ---
 
-## 🚀 Running the Project Locally
+## 🛠️ Tech Stack
 
-To run this project on your machine, you need **Node.js (v16+)** and **Python (v3.8+)** installed.
+| Layer | Technology |
+|---|---|
+| Frontend | React.js, Vite, CSS |
+| Backend | Python, Flask |
+| Database | SQLite |
+| AI/ML | Google Gemini API, OpenRouter API |
+| Tools | VS Code, Git |
 
-### 1. Set Up Environment Variables (API Keys)
-In the `backend` folder, create a file named `.env` and add your OpenRouter API key:
-```env
-NVIDIA_API_KEY=your_openrouter_api_key_here
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- Python (v3.10+)
+- Git
+
+### Installation
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/rishabhdubey112/Virtual-Herbal-Garden.git
+cd Virtual-Herbal-Garden
 ```
 
-### 2. Setting up the Backend (Flask)
-Open a terminal and execute the following:
+**2. Backend setup**
 ```bash
 cd backend
 pip install -r requirements.txt
 python app.py
 ```
-*The Flask server will start on `http://localhost:5000`.*
 
-### 3. Setting up the Frontend (React)
-Open a **new** terminal and execute:
+**3. Frontend setup**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*The Vite development server will start. Open your browser and go to `http://localhost:5173`.*
+
+**4. Environment variables**
+
+Create `backend/.env` file:
+```env
+OPENROUTER_API_KEY=your_api_key_here
+```
+
+**5. Open in browser**
+```
+http://localhost:5173
+```
 
 ---
 
-## 📱 Presenting on Mobile (Web-to-APK Method)
-
-If you need to showcase this project to clients or college professors on a mobile phone without physically copying files or using Android Studio, follow this "LocalTunnel" method:
-
-1. Ensure both the Flask and React servers are running on your laptop.
-2. The frontend code is already configured to automatically proxy `/api` requests to the local backend.
-3. In a new terminal, run: 
-   ```bash
-   npx localtunnel --port 5173
-   ```
-4. Copy the generated `loca.lt` link.
-5. Search for a free "Web-to-APK Converter" online (e.g., *webintoapp.com*).
-6. Paste your `loca.lt` link, generate the `.apk`, and install it on your mobile device.  
-*(Note: Your laptop must remain ON with servers running during the mobile presentation).*
-
----
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
-virtual-herbal-garden/
+Virtual-Herbal-Garden/
 ├── backend/
-│   ├── app.py                  # Main Flask Server & API routes
-│   ├── model.py                # AI Integration (Vision & Text)
-│   ├── database.py             # SQLite setup and migrations
-│   ├── .env                    # API keys
-│   └── herbal_garden.db        # Database File
-└── frontend/
-    ├── src/
-    │   ├── App.jsx             # React Router Setup
-    │   ├── pages/              # Home, Identify, Consult, Cart, PlantDetails, Login
-    │   ├── components/         # Navbar, UploadPlant
-    │   └── index.css           # Global Styling & Glassmorphism
-    ├── package.json
-    └── vite.config.js          # API Proxy settings
+│   ├── app.py          # Flask API server
+│   ├── model.py        # Database models
+│   ├── database.py     # DB configuration
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── components/ # Reusable components
+│   │   ├── pages/      # App pages
+│   │   └── context/    # React context
+│   └── public/
+│       └── plants/     # Plant images
+└── README.md
 ```
 
 ---
 
-## 🔐 Future Enhancements
-* Multi-language support (Hindi / Regional languages).
-* Advanced user authentication (Firebase/OAuth integration).
-* Dark Mode toggle.
+## 👨‍💻 Developer
+
+**Rishabh Dubey**
+- 📧 [rishabh8601dubey@gmail.com](mailto:rishabh8601dubey@gmail.com)
+- 💼 [LinkedIn](https://linkedin.com/in/rishabhdubey112)
+- 🐙 [GitHub](https://github.com/rishabhdubey112)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+**⭐ Star this repo if you found it helpful!**
+
+*Made with ❤️ for Smart India Hackathon 2026*
+
+</div>
