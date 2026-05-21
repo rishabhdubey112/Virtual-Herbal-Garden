@@ -8,8 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 # Allow requests from the React dev server and production
-CORS(app, origins=["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173"])
-
+CORS(app, origins=["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173", "https://virtual-herbal-garden-chi.vercel.app"])
 # Initialize the database on startup
 init_db()
 
