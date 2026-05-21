@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState, useEffect } from 'react';
 import { User, Mail, Lock, LogIn, UserPlus, LogOut, Leaf, Search, Heart, ShoppingBag, Star, ArrowRight, PackageOpen, Clock, Droplets, Sprout } from 'lucide-react';
 
@@ -45,13 +46,13 @@ const Login = () => {
     useEffect(() => {
         if (user && user.id) {
             // Fetch stats
-            fetch(`http://localhost:5000/user/stats/${user.id}`)
+            fetch(`https://vhg-backend.onrender.com/user/stats/${user.id}`)
                 .then(res => res.json())
                 .then(data => { if (data.success) setStats({ searches: data.searches, saves: data.saves }); })
                 .catch(err => console.error("Error fetching stats:", err));
 
             // Fetch orders
-            fetch(`http://localhost:5000/user/orders/${user.id}`)
+            fetch(`https://vhg-backend.onrender.com/user/orders/${user.id}`)
                 .then(res => res.json())
                 .then(data => { if (data.success) setOrders(data.orders); })
                 .catch(err => console.error("Error fetching orders:", err));
@@ -66,7 +67,7 @@ const Login = () => {
         setError('');
         const endpoint = isLoginView ? '/login' : '/register';
         try {
-            const response = await fetch(`http://localhost:5000${endpoint}`, {
+            const response = await fetch(`https://vhg-backend.onrender.com${endpoint}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

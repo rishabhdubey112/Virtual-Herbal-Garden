@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -116,9 +117,9 @@ const Identify = () => {
                 const fd = new FormData();
                 fd.append('image', file);
                 if (userId) fd.append('userId', userId);
-                res = await fetch('http://localhost:5000/predict', { method: 'POST', body: fd });
+                res = await fetch('https://vhg-backend.onrender.com/predict', { method: 'POST', body: fd });
             } else if (mode === 'text' && textInput.trim()) {
-                res = await fetch('http://localhost:5000/predict', {
+                res = await fetch('https://vhg-backend.onrender.com/predict', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: textInput.trim(), userId })

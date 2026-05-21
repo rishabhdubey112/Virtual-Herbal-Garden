@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState, useEffect } from 'react';
 import { PlusCircle, Trash2, Edit, Save, X, Settings, Search, Package, Leaf, Eye, EyeOff, AlertTriangle } from 'lucide-react';
 
@@ -37,7 +38,7 @@ const AdminPanel = () => {
     const fetchPlants = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/plants');
+            const res = await fetch('https://vhg-backend.onrender.com/plants');
             const data = await res.json();
             if (data.success) setPlants(data.plants);
         } catch (err) {
@@ -56,7 +57,7 @@ const AdminPanel = () => {
         e.preventDefault();
         setSaving(true);
 
-        const url = editingId ? `http://localhost:5000/update-plant/${editingId}` : 'http://localhost:5000/add-plant';
+        const url = editingId ? `https://vhg-backend.onrender.com/update-plant/${editingId}` : 'https://vhg-backend.onrender.com/add-plant';
         const method = editingId ? 'PUT' : 'POST';
 
         try {
@@ -96,7 +97,7 @@ const AdminPanel = () => {
 
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/delete-plant/${id}`, { method: 'DELETE' });
+            const res = await fetch(`https://vhg-backend.onrender.com/delete-plant/${id}`, { method: 'DELETE' });
             const data = await res.json();
             if (data.success) {
                 fetchPlants();

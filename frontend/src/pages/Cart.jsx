@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Trash2, Plus, Minus, ArrowLeft, Leaf, ShoppingBag, CheckCircle, CreditCard, Smartphone, Banknote, ShieldCheck } from 'lucide-react';
@@ -46,7 +47,7 @@ const Cart = () => {
                 paymentMethod: paymentMethod
             };
 
-            const res = await fetch('http://localhost:5000/place-order', {
+            const res = await fetch('https://vhg-backend.onrender.com/place-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

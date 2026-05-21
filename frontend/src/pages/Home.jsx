@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Mic, ScanLine } from 'lucide-react';
@@ -36,7 +37,7 @@ const Home = () => {
             if (cat && cat !== 'All') params.append('category', cat);
             if (search.trim()) params.append('search', search.trim());
 
-            const url = `http://localhost:5000/plants${params.toString() ? '?' + params.toString() : ''}`;
+            const url = `https://vhg-backend.onrender.com/plants${params.toString() ? '?' + params.toString() : ''}`;
             const res = await fetch(url);
             if (!res.ok) throw new Error('Server error');
             const data = await res.json();

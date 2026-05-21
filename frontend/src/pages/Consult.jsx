@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState } from 'react';
 import { Send, Activity, Sparkles, AlertCircle, ArrowRight, HeartPulse, Stethoscope, Droplets, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ const Consult = () => {
         setResults([]);
 
         try {
-            const res = await fetch('http://localhost:5000/consult', {
+            const res = await fetch('https://vhg-backend.onrender.com/consult', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ symptoms })

@@ -1,3 +1,4 @@
+import API_URL from '../config.js';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Heart, Info, ShieldCheck, Sparkles, Droplets, ShoppingCart, Check, SunDim, Star } from 'lucide-react';
@@ -21,7 +22,7 @@ const PlantDetails = () => {
     useEffect(() => {
         const fetchPlant = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/plant/${name}`);
+                const res = await fetch(`https://vhg-backend.onrender.com/plant/${name}`);
                 const data = await res.json();
                 if (data.success) {
                     setPlant(data.plant);
@@ -35,7 +36,7 @@ const PlantDetails = () => {
 
         const fetchReviews = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/reviews/${name}`);
+                const res = await fetch(`https://vhg-backend.onrender.com/reviews/${name}`);
                 const data = await res.json();
                 if (data.success) setReviews(data.reviews);
             } catch (err) {
@@ -55,7 +56,7 @@ const PlantDetails = () => {
         
         setIsSubmittingReview(true);
         try {
-            const res = await fetch('http://localhost:5000/reviews', {
+            const res = await fetch('https://vhg-backend.onrender.com/reviews', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ plantName: plant.name, userName: user.name, rating, comment })
@@ -84,7 +85,7 @@ const PlantDetails = () => {
         setIsSaving(true);
 
         try {
-            const res = await fetch('http://localhost:5000/user/save', {
+            const res = await fetch('https://vhg-backend.onrender.com/user/save', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: user.id, plantName: plant.name })
