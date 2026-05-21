@@ -44,7 +44,7 @@ const Home = () => {
             if (data.success) setPlants(data.plants);
             else throw new Error(data.message);
         } catch (err) {
-            setFetchError('Could not reach the Flask backend. Make sure it is running on port 5000.');
+           setFetchError('Backend is starting up, please wait 30 seconds and refresh the page...');
             setPlants([]);
         } finally {
             setLoading(false);
