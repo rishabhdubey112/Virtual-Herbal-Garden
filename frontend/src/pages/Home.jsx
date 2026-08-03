@@ -37,14 +37,20 @@ const Home = () => {
             if (cat && cat !== 'All') params.append('category', cat);
             if (search.trim()) params.append('search', search.trim());
 
-            const url = `https://vhg-backend.onrender.com/plants${params.toString() ? '?' + params.toString() : ''}`;
+            const url = `${API_URL}/plants${params.toString() ? '?' + params.toString() : ''}`;
             const res = await fetch(url);
-            if (!res.ok) throw new Error('Server error');
+            if (!res.ok) {
+                const text = await res.text().catch(() => null);
+                throw new Error(text || `Server returned ${res.status}`);
+            }
             const data = await res.json();
             if (data.success) setPlants(data.plants);
-            else throw new Error(data.message);
+            else throw new Error(data.message || 'Unknown server error');
         } catch (err) {
-           setFetchError('Backend is starting up, please wait 30 seconds and refresh the page...');
+            // Log the error to help debugging in browser/devtools
+            // Network errors, CORS, or backend down will surface here
+            console.error('fetchPlants error:', err);
+            setFetchError(err.message || 'Cannot connect to backend.');
             setPlants([]);
         } finally {
             setLoading(false);
@@ -159,7 +165,7 @@ const styles = {
     hero: { position: 'relative', textAlign: 'center', padding: '5rem 2rem', background: 'var(--hero-gradient)', borderRadius: 'var(--radius-lg)', overflow: 'hidden' },
     heroDots: { position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(var(--primary-light) 1px, transparent 1px)', backgroundSize: '30px 30px', opacity: 0.12, pointerEvents: 'none' },
     heroInner: { position: 'relative', maxWidth: '780px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', zIndex: 1 },
-    heroPill: { display: 'inline-block', padding: '0.5rem 1.25rem', background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(8px)', borderRadius: 'var(--radius-full)', fontWeight: 600, fontSize: '0.95rem', color: 'var(--primary-dark)' },
+    heroPill: { display: 'inline-block', padding: '0.5rem 1.25rem', background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(8px)', borderRadius: 'var(--radius-full)', fontWeight: 600, fontSize: '0.95rem' },
     heroH1: { fontSize: 'clamp(2.8rem, 6vw, 4.5rem)', lineHeight: 1.1, letterSpacing: '-2px', margin: 0, color: 'var(--text-main)' },
     gradient: { background: 'linear-gradient(135deg, var(--primary) 0%, #007f5f 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'inline-block' },
     heroSub: { fontSize: '1.2rem', color: 'var(--text-muted)', maxWidth: '550px', lineHeight: 1.6, margin: 0 },
@@ -172,7 +178,7 @@ const styles = {
     searchInput: { paddingLeft: '3.25rem', paddingRight: '3.5rem', borderRadius: 'var(--radius-full)', height: '56px', fontSize: '1.05rem', boxShadow: 'var(--shadow-sm)' },
     micBtn: { position: 'absolute', right: '1rem', background: 'transparent', display: 'flex' },
     filterRow: { display: 'flex', gap: '0.75rem', overflowX: 'auto', padding: '0.5rem 0 1.5rem 0', justifyContent: 'center', flexWrap: 'wrap' },
-    errorBox: { padding: '1rem 1.5rem', background: 'rgba(239,71,111,0.08)', borderLeft: '4px solid var(--error)', borderRadius: '8px', color: 'var(--error)', marginBottom: '1.5rem', fontWeight: 500 },
+    errorBox: { padding: '1rem 1.5rem', background: 'rgba(239,71,111,0.08)', borderLeft: '4px solid var(--error)', borderRadius: '8px', color: 'var(--error)', marginBottom: '1.5rem', fontWeight: 700 },
     grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' },
     empty: { textAlign: 'center', padding: '4rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }
 };
